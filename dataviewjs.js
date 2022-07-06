@@ -34,7 +34,7 @@ for (const habitsObject of habits) {
     if (defaultHeaders.includes(header)) continue; // Don't overwrite default headers.
 
     let habitStatus = "➖"; // This emoji is seen if a corresponding task doesn't exist for a header (e.g. task didn't previously exist).
-    if (Object.hasOwn(habitsObject, header))
+    if (habitsObject.hasOwnProperty(header))
       // If task exists, we know it must be complete or incomplete.
       habitStatus = habitsObject[header] ? "✔" : "❌";
     row.push(habitStatus);
