@@ -4,6 +4,12 @@ const headers = new Set(defaultHeaders) // Set of task names to be used as table
 const rows = []
 
 const noteDay = dv.current().file.day
+if (!noteDay)
+  throw {
+    stack:
+      '(If this note is your template, this error is expected.) Unable to get note\'s day. Note should be named in the "YYYY-MM-DD" format.',
+  }
+
 const pages = dv
   .pages('"Daily Notes"')
   .where((p) => p.file.day >= noteDay.minus({ days: 7 })) // Only include previous week in table.
