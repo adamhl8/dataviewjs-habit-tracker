@@ -21,6 +21,7 @@ for (const page of pages) {
   const habitsObject = { noteLink };
 
   for (const habit of pageHabits) {
+    const habitText = habit.text.split(" ✅")[0]; // Remove completion text from Tasks plugin if it exsits.
     habitsObject[habit.text] = habit.completed; // Build habitsObject. Key is the task's text. Value is tasks's completion.
     headers.add(habit.text); // Build headers set where each header is the task's text.
   }
