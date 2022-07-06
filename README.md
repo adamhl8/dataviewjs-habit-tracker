@@ -4,6 +4,8 @@ This is a code snippet for the Obsidian plugin [Dataview](https://github.com/bla
 
 Issues/PRs are welcome and encouraged.
 
+## Example
+
 ```
 ## Habits
 - [ ] Exercise
