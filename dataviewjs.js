@@ -6,8 +6,8 @@ const rows = []
 const noteDay = dv.current().file.day
 const pages = dv
   .pages('"Daily Notes"')
-  .where((p) => p.file.day < noteDay) // Excludes current note in table.
   .where((p) => p.file.day >= noteDay.minus({ days: 7 })) // Only include previous week in table.
+  .where((p) => p.file.day <= noteDay) // Don't include future notes.
   .sort((p) => p.file.day, 'desc') // Sort table by most recent day.
 
 for (const page of pages) {
@@ -20,8 +20,8 @@ for (const page of pages) {
 
   for (const habit of pageHabits) {
     const habitText = habit.text.split(' ✅')[0] // Remove completion text from Tasks plugin if it exsits.
-    habitsObject[habit.text] = habit.completed // Build habitsObject. Key is the task's text. Value is tasks's completion.
-    headers.add(habit.text) // Build headers set where each header is the task's text.
+    habitsObject[habitText] = habit.completed // Build habitsObject. Key is the task's text. Value is tasks's completion.
+    headers.add(habitText) // Build headers set where each header is the task's text.
   }
 
   habits.push(habitsObject)
