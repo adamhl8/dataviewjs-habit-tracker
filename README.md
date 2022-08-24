@@ -1,4 +1,4 @@
-# dataviewjs-habits-tracker
+# dataviewjs-habit-tracker
 
 This is a code snippet for the Obsidian plugin [Dataview](https://github.com/blacksmithgu/obsidian-dataview). This generates a table that tracks habit completions over the past week. No Dataview annotations required!
 
