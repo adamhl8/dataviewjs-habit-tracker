@@ -16,6 +16,8 @@ Issues/PRs are welcome and encouraged.
 <dataviewjs code block here>
 ```
 
+Get snippet code [here](https://github.com/adamhl8/dataviewjs-habits-tracker/blob/main/dataviewjs.js).
+
 ![](https://user-images.githubusercontent.com/1844269/177612045-5409aff4-c569-419c-8314-1554ee206091.png)
 
 - It automatically creates table headers based on unique task names (no duplicates).
