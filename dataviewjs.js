@@ -1,56 +1,70 @@
-const habits = [] // Array of objects for each page's tasks.
-const defaultHeaders = ['Day']
-const headers = new Set(defaultHeaders) // Set of task names to be used as table headers.
-const rows = []
+// dataviewjs-habit-tracker | https://github.com/adamhl8/dataviewjs-habit-tracker
+// Looking to make modifications? See the TypeScript source here: https://github.com/adamhl8/dataviewjs-habit-tracker/blob/main/src/index.ts
 
-const noteDay = dv.current().file.day
-if (!noteDay)
-  throw {
-    stack:
-      '(If this note is your template, this error is expected.) Unable to get note\'s day. Note should be named in the "YYYY-MM-DD" format.',
-  }
-
-const pages = dv
-  .pages('"Daily Notes"')
-  .where((p) => p.file.day >= noteDay.minus({ days: 7 })) // Only include previous week in table.
-  .where((p) => p.file.day <= noteDay) // Don't include future notes.
-  .sort((p) => p.file.day, 'desc') // Sort table by most recent day.
-
-for (const page of pages) {
-  // Only include tasks under a header named "Habits".
-  const pageHabits = page.file.tasks.filter((t) => t.header.subpath == 'Habits')
-
-  const noteLink = page.file.link
-  noteLink.display = page.file.day.weekdayLong // Set display name of the note link to the day of the week.
-  const habitsObject = { noteLink }
-
-  for (const habit of pageHabits) {
-    let habitText = habit.text.split(' ✅')[0] // Remove completion text from Tasks plugin.
-    // Remove tag text.
-    for (const tag of habit.tags) {
-      habitText = habitText.replace(tag, '')
+// src/index.ts
+var getPageDay = function (currentPage) {
+  const pageDay = currentPage.file.day
+  if (!pageDay) {
+    throw {
+      stack:
+        '(If this note is your template, this error is expected.) Unable to get note\'s day. Note should be named in the "YYYY-MM-DD" format.',
     }
-    habitText = habitText.trim()
-
-    habitsObject[habitText] = habit.completed // Build habitsObject. Key is the task's text. Value is tasks's completion.
-    headers.add(habitText) // Build headers set where each header is the task's text.
   }
-
-  habits.push(habitsObject)
+  return pageDay
 }
-
-for (const habitsObject of habits) {
-  const row = [habitsObject.noteLink] // Start building row data. Fill in first value (Day) with note link.
+var getDailyNotesPages = function (pageDay) {
+  return dv
+    .pages('"Daily Notes"')
+    .where((p) => getPageDay(p) >= pageDay.minus({ days: 7 }))
+    .where((p) => getPageDay(p) <= pageDay)
+    .sort((p) => p.file.day, "desc")
+}
+var getCleanHabitText = function (habit) {
+  let habitText = habit.text.split(" \u2705")[0] ?? ""
+  for (const tag of habit.tags) {
+    habitText = habitText.replace(tag, "")
+  }
+  return habitText.trim()
+}
+var getPageHabits = function (page) {
+  const habitTasks = page.file.tasks.filter((t) => t.section.subpath == "Habits")
+  const habits = {}
+  for (const habitTask of habitTasks) {
+    const habitText = getCleanHabitText(habitTask)
+    habits[habitText] = habitTask.completed
+  }
+  return habits
+}
+var createRow = function (pageData, headers) {
+  const pageDay = getPageDay(pageData.page)
+  const pageLink = pageData.page.file.link
+  pageLink.display = pageDay.weekdayLong ?? ""
+  const row = [pageLink]
   for (const header of headers) {
-    if (defaultHeaders.includes(header)) continue // Don't overwrite default headers.
-
-    let habitStatus = '➖' // This emoji is seen if a corresponding task doesn't exist for a header (e.g. task didn't previously exist).
-    if (habitsObject.hasOwnProperty(header))
-      // If task exists, we know it must be complete or incomplete.
-      habitStatus = habitsObject[header] ? '✔' : '❌'
+    if (defaultHeaders.includes(header)) continue
+    let habitStatus = "\u2796"
+    if (Object.prototype.hasOwnProperty.call(pageData.habits, header))
+      habitStatus = pageData.habits[header] ? "\u2714" : "\u274C"
     row.push(habitStatus)
   }
-  rows.push(row)
+  return row
 }
-
-dv.table(headers, rows)
+async function main() {
+  const currentPage = dv.current()
+  const pageDay = getPageDay(currentPage)
+  const pages = getDailyNotesPages(pageDay)
+  const headers = new Set(defaultHeaders)
+  const pageDataArray = pages.map((page) => {
+    const habits = getPageHabits(page)
+    for (const habit of Object.keys(habits)) headers.add(habit)
+    return { page, habits }
+  })
+  const rows = []
+  for (const pageData of pageDataArray) {
+    const row = createRow(pageData, headers)
+    rows.push(row)
+  }
+  await dv.table([...headers], rows)
+}
+var defaultHeaders = ["Day"]
+await main()

@@ -19,8 +19,8 @@ Issues/PRs are welcome and encouraged.
 ![](https://user-images.githubusercontent.com/1844269/177612045-5409aff4-c569-419c-8314-1554ee206091.png)
 
 - It automatically creates table headers based on unique task names (no duplicates).
-- **This means you don’t need to define any specific Dataview annotations. Just normal tasks.**
-- If a task didn’t exist previously (or no longer exists), you’ll see a “➖” for its status. Otherwise, “✔" for complete and “❌” for incomplete.
+- **This means you don't need to define any specific Dataview annotations. Just normal tasks.**
+- If a task didn't exist previously (or no longer exists), you'll see a "➖" for its status. Otherwise, "✔" for complete and "❌" for incomplete.
 
 ## Setup
 
