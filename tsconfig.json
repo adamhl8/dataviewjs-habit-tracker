@@ -13,6 +13,9 @@
     "forceConsistentCasingInFileNames": true,
     "exactOptionalPropertyTypes": true,
     "noUncheckedIndexedAccess": true,
-    "types": ["bun-types"]
+    "types": ["bun-types"],
+    "paths": {
+      "data-model/*": ["./node_modules/obsidian-dataview/lib/data-model/*"]
+    }
   }
 }

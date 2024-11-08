@@ -1,8 +1,7 @@
-import { DateTime } from "luxon"
-import { DataArray } from "obsidian-dataview/lib/api/data-array"
-import { DataviewInlineApi } from "obsidian-dataview/lib/api/inline-api"
-import { SMarkdownPage, STask } from "obsidian-dataview/lib/data-model/serialized/markdown"
-import { Link } from "obsidian-dataview/lib/data-model/value"
+import type { DateTime } from "luxon"
+import type { DataArray } from "obsidian-dataview/lib/api/data-array"
+import type { DataviewInlineApi } from "obsidian-dataview/lib/api/inline-api"
+import type { SMarkdownPage, STask } from "obsidian-dataview/lib/data-model/serialized/markdown"
 
 interface ExtendedDataviewInlineApi extends DataviewInlineApi {
   current: () => SMarkdownPage
@@ -10,6 +9,7 @@ interface ExtendedDataviewInlineApi extends DataviewInlineApi {
 
 declare const dv: ExtendedDataviewInlineApi
 
+// This is our own object for storing a page along with its habits.
 interface PageData {
   page: SMarkdownPage
   habits: Record<string, boolean>
@@ -46,7 +46,7 @@ function getCleanHabitText(habit: STask) {
 }
 
 function getPageHabits(page: SMarkdownPage) {
-  const habitTasks = page.file.tasks.filter((t: { section: Link }) => t.section.subpath == "Habits")
+  const habitTasks = page.file.tasks.filter((t) => t.section.subpath === "Habits")
   const habits: Record<string, boolean> = {}
 
   // Build habits. Key is the task's text. Value is tasks's completion.
@@ -60,10 +60,10 @@ function getPageHabits(page: SMarkdownPage) {
 
 function createRow(pageData: PageData, headers: Set<string>) {
   const pageDay = getPageDay(pageData.page)
-  const pageLink = pageData.page.file.link as Link
+  const pageLink = pageData.page.file.link
   pageLink.display = pageDay.weekdayLong ?? "" // Set display name of the note link to the day of the week.
 
-  const row: [Link | string] = [pageLink] // Start building row data. Fill in first value (Day) with note link.
+  const row: unknown[] = [pageLink] // Start building row data. Fill in first value (Day) with note link.
   for (const header of headers) {
     if (defaultHeaders.includes(header)) continue // Don't overwrite default headers.
 
