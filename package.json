@@ -2,24 +2,17 @@
   "name": "dataviewjs-habit-tracker",
   "type": "module",
   "scripts": {
-    "build": "bun build ./src/index.ts --outfile=dataviewjs.js && bun format",
-    "format": "prettier --write .",
-    "lint": "tsc && eslint ./src/"
+    "bundle": "./build.sh",
+    "lint": "tsc --noEmit && prettier --write . && eslint ."
   },
   "devDependencies": {
-    "@types/luxon": "^3.3.7",
-    "@typescript-eslint/eslint-plugin": "^6.14.0",
-    "@typescript-eslint/parser": "^6.14.0",
-    "bun-types": "latest",
-    "eslint": "^8.56.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-sonarjs": "^0.23.0",
-    "eslint-plugin-unicorn": "^49.0.0",
-    "obsidian-dataview": "^0.5.64",
-    "prettier": "^3.1.1",
-    "prettier-plugin-organize-imports": "^3.2.4",
-    "prettier-plugin-pkg": "^0.18.0",
-    "prettier-plugin-sh": "^0.13.1",
-    "typescript": "^5.3.3"
+    "@types/bun": "^1.2.4",
+    "@types/luxon": "^3.4.2",
+    "eslint": "^9.22.0",
+    "eslint-config-builder": "^0.19.1",
+    "obsidian-dataview": "^0.5.67",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.26.0"
   }
 }

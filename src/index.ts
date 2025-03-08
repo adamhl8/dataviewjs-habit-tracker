@@ -2,6 +2,7 @@ import type { DateTime } from "luxon"
 import type { DataArray } from "obsidian-dataview/lib/api/data-array"
 import type { DataviewInlineApi } from "obsidian-dataview/lib/api/inline-api"
 import type { SMarkdownPage, STask } from "obsidian-dataview/lib/data-model/serialized/markdown"
+import type { Link } from "obsidian-dataview/lib/data-model/value"
 
 interface ExtendedDataviewInlineApi extends DataviewInlineApi {
   current: () => SMarkdownPage
@@ -46,7 +47,9 @@ function getCleanHabitText(habit: STask) {
 }
 
 function getPageHabits(page: SMarkdownPage) {
-  const habitTasks = page.file.tasks.filter((t) => t.section.subpath === "Habits")
+  const habitTasks = page.file.tasks.filter(
+    (t) => (t.section as Link).subpath === "Habits" || t.tags.includes("#habit"),
+  )
   const habits: Record<string, boolean> = {}
 
   // Build habits. Key is the task's text. Value is tasks's completion.
@@ -60,15 +63,15 @@ function getPageHabits(page: SMarkdownPage) {
 
 function createRow(pageData: PageData, headers: Set<string>) {
   const pageDay = getPageDay(pageData.page)
-  const pageLink = pageData.page.file.link
+  const pageLink = pageData.page.file.link as Link
   pageLink.display = pageDay.weekdayLong ?? "" // Set display name of the note link to the day of the week.
 
-  const row: unknown[] = [pageLink] // Start building row data. Fill in first value (Day) with note link.
+  const row: (Link | string)[] = [pageLink] // Start building row data. Fill in first value (Day) with note link.
   for (const header of headers) {
     if (defaultHeaders.includes(header)) continue // Don't overwrite default headers.
 
     let habitStatus = "➖" // This emoji is seen if a corresponding task doesn't exist for a header (e.g. task didn't previously exist).
-    if (Object.prototype.hasOwnProperty.call(pageData.habits, header))
+    if (Object.hasOwn(pageData.habits, header))
       // If task exists, we know it must be complete or incomplete.
       habitStatus = pageData.habits[header] ? "✔" : "❌"
 
@@ -92,6 +95,8 @@ async function main() {
   const rows = []
   for (const pageData of pageDataArray) {
     const row = createRow(pageData, headers)
+    // don't include rows where no habits exist
+    if (row.slice(defaultHeaders.length).every((status) => status === "➖")) continue
     rows.push(row)
   }
 

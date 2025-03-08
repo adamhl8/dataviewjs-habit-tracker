@@ -1,21 +1,9 @@
 {
-  "include": ["./src/"],
+  "extends": "./node_modules/eslint-config-builder/dist/tsconfig.json",
+  "exclude": ["dataviewjs.js"],
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "moduleDetection": "force",
-    "allowImportingTsExtensions": true,
-    "skipLibCheck": true,
-    "noEmit": true,
-    "isolatedModules": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "exactOptionalPropertyTypes": true,
-    "noUncheckedIndexedAccess": true,
-    "types": ["bun-types"],
-    "paths": {
-      "data-model/*": ["./node_modules/obsidian-dataview/lib/data-model/*"]
-    }
+    "noEmit": false,
+    "allowImportingTsExtensions": false,
+    "outDir": "./dist"
   }
 }
