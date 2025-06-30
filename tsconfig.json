@@ -1,5 +1,5 @@
 {
-  "extends": "./node_modules/eslint-config-builder/dist/tsconfig.json",
+  "extends": "@adamhl8/configs/tsconfig",
   "exclude": ["dataviewjs.js"],
   "compilerOptions": {
     "noEmit": false,
