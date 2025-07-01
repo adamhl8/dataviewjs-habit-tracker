@@ -1,8 +1,8 @@
 import type { DateTime } from "luxon"
-import type { DataArray } from "obsidian-dataview/lib/api/data-array"
-import type { DataviewInlineApi } from "obsidian-dataview/lib/api/inline-api"
-import type { SMarkdownPage, STask } from "obsidian-dataview/lib/data-model/serialized/markdown"
-import type { Link } from "obsidian-dataview/lib/data-model/value"
+import type { DataArray } from "obsidian-dataview/lib/api/data-array.d.ts"
+import type { DataviewInlineApi } from "obsidian-dataview/lib/api/inline-api.d.ts"
+import type { SMarkdownPage, STask } from "obsidian-dataview/lib/data-model/serialized/markdown.d.ts"
+import type { Link } from "obsidian-dataview/lib/data-model/value.d.ts"
 
 interface ExtendedDataviewInlineApi extends DataviewInlineApi {
   current: () => SMarkdownPage
@@ -21,6 +21,7 @@ const defaultHeaders = ["Day"]
 function getPageDay(currentPage: SMarkdownPage) {
   const pageDay = currentPage.file.day
   if (!pageDay) {
+    // biome-ignore lint/style/useThrowOnlyError: Obsidian shows the stack trace if an error occurs, so we overwrite it to show a friendlier message.
     throw {
       stack:
         '(If this note is your template, this error is expected.) Unable to get note\'s day. Note should be named in the "YYYY-MM-DD" format.',
@@ -92,7 +93,7 @@ async function main() {
     return { page, habits }
   })
 
-  const rows = []
+  const rows: (string | Link)[][] = []
   for (const pageData of pageDataArray) {
     const row = createRow(pageData, headers)
     // don't include rows where no habits exist

@@ -6,7 +6,7 @@
     "lint": "tsc --noEmit && biome check --write"
   },
   "devDependencies": {
-    "@adamhl8/configs": "^0.3.0",
+    "@adamhl8/configs": "^0.4.1",
     "@biomejs/biome": "^2.0.6",
     "@types/bun": "^1.2.17",
     "@types/luxon": "^3.6.2",

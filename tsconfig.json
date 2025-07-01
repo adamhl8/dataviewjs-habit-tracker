@@ -1,9 +1,4 @@
 {
-  "extends": "@adamhl8/configs/tsconfig",
-  "exclude": ["dataviewjs.js"],
-  "compilerOptions": {
-    "noEmit": false,
-    "allowImportingTsExtensions": false,
-    "outDir": "./dist"
-  }
+  "extends": "@adamhl8/configs/tsconfig-package",
+  "exclude": ["dataviewjs.js"]
 }
