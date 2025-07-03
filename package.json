@@ -3,7 +3,9 @@
   "type": "module",
   "scripts": {
     "bundle": "./build.sh",
-    "lint": "tsc --noEmit && biome check --write"
+    "lint": "tsc --noEmit && biome check --write",
+    "prepare": "find .githooks -type f -exec ln -srf {} .git/hooks/ \\;",
+    "prepublishOnly": "bun bundle"
   },
   "devDependencies": {
     "@adamhl8/configs": "^0.4.1",
