@@ -1,4 +1,4 @@
 {
-  "extends": "@adamhl8/configs/tsconfig-package",
+  "extends": "@adamhl8/configs/tsconfig",
   "exclude": ["dataviewjs.js"]
 }
