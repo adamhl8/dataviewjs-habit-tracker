@@ -1,4 +1,7 @@
 {
   "extends": "@adamhl8/configs/tsconfig",
-  "exclude": ["dataviewjs.js"]
+  "exclude": ["dataviewjs.js"],
+  "compilerOptions": {
+    "sourceMap": false
+  }
 }
