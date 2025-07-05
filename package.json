@@ -4,7 +4,7 @@
   "scripts": {
     "bundle": "rm -rf ./dist && bun lint && ./bundle.sh",
     "lint": "tsc --noEmit && biome check --write",
-    "prepare": "find .githooks -type f -exec ln -srf {} .git/hooks/ \\;",
+    "prepare": "find .githooks -type f -exec ln -srf {} .git/hooks/ \\; || true",
     "prepublishOnly": "bun bundle"
   },
   "devDependencies": {
