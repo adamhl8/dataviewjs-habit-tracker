@@ -2,7 +2,7 @@
   "name": "dataviewjs-habit-tracker",
   "type": "module",
   "scripts": {
-    "bundle": "./bundle.sh",
+    "bundle": "rm -rf ./dist && bun lint && ./bundle.sh",
     "lint": "tsc --noEmit && biome check --write",
     "prepare": "find .githooks -type f -exec ln -srf {} .git/hooks/ \\;",
     "prepublishOnly": "bun bundle"

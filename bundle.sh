@@ -1,6 +1,5 @@
 #!/bin/sh
 
-rm -rf ./dist/
 tsc
 cp ./dist/index.js ./dataviewjs.js
 rm -rf ./dist/
