@@ -8,12 +8,17 @@
     "prepublishOnly": "bun bundle"
   },
   "devDependencies": {
-    "@adamhl8/configs": "^0.9.1",
-    "@biomejs/biome": "^2.1.1",
-    "@types/bun": "^1.2.18",
-    "@types/luxon": "^3.6.2",
+    "@adamhl8/configs": "^0.15.15",
+    "@arethetypeswrong/core": "^0.18.2",
+    "@biomejs/biome": "^2.2.4",
+    "@types/bun": "^1.2.22",
+    "@types/luxon": "^3.7.1",
+    "knip": "^5.63.1",
+    "markdown-toc": "^1.2.0",
     "obsidian-dataview": "^0.5.68",
+    "publint": "^0.3.12",
     "tsc-alias": "^1.8.16",
-    "typescript": "^5.8.3"
+    "tsdown": "^0.15.2",
+    "typescript": "^5.9.2"
   }
 }
