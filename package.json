@@ -1,24 +1,24 @@
 {
-	"name": "dataviewjs-habit-tracker",
-	"type": "module",
-	"scripts": {
-		"bundle": "bun lint && tsdown",
-		"lint": "markdown-toc -i --bullets '-' --maxdepth 3 ./README.md && tsc --noEmit && biome check --write && adamhl8-knip",
-		"prepare": "find .githooks -type f -exec ln -srf {} .git/hooks/ \\; || true",
-		"prepublishOnly": "bun bundle"
-	},
-	"devDependencies": {
-		"@adamhl8/configs": "^0.15.20",
-		"@arethetypeswrong/core": "^0.18.2",
-		"@biomejs/biome": "^2.2.4",
-		"@types/bun": "^1.2.22",
-		"@types/luxon": "^3.7.1",
-		"knip": "^5.63.1",
-		"markdown-toc": "^1.2.0",
-		"obsidian-dataview": "^0.5.68",
-		"publint": "^0.3.13",
-		"tsc-alias": "^1.8.16",
-		"tsdown": "^0.15.2",
-		"typescript": "^5.9.2"
-	}
+  "name": "dataviewjs-habit-tracker",
+  "version": "0.2.1",
+  "type": "module",
+  "scripts": {
+    "bundle": "bun lint && tsdown",
+    "lint": "markdown-toc -i --bullets '-' --maxdepth 3 ./README.md && tsc --noEmit && biome check --write && adamhl8-knip",
+    "prepare": "find .githooks -type f -exec ln -srf {} .git/hooks/ \\; || true",
+    "prepublishOnly": "bun bundle"
+  },
+  "devDependencies": {
+    "@adamhl8/configs": "^0.15.23",
+    "@arethetypeswrong/core": "^0.18.2",
+    "@biomejs/biome": "^2.2.4",
+    "@types/bun": "^1.2.22",
+    "@types/luxon": "^3.7.1",
+    "knip": "^5.63.1",
+    "markdown-toc": "^1.2.0",
+    "obsidian-dataview": "^0.5.68",
+    "publint": "^0.3.13",
+    "tsdown": "^0.15.2",
+    "typescript": "^5.9.2"
+  }
 }

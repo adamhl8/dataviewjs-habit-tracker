@@ -4,8 +4,7 @@
     "paths": {
       "~/*": ["./src/*"],
       "@/*": ["./src/*"]
-    },
-    "sourceMap": false
+    }
   },
   "exclude": ["dataviewjs.js"]
 }
