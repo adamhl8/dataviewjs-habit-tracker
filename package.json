@@ -9,7 +9,7 @@
     "prepublishOnly": "bun bundle"
   },
   "devDependencies": {
-    "@adamhl8/configs": "^0.15.24",
+    "@adamhl8/configs": "^0.16.0",
     "@arethetypeswrong/core": "^0.18.2",
     "@biomejs/biome": "^2.2.4",
     "@types/bun": "^1.2.22",
@@ -18,7 +18,7 @@
     "markdown-toc": "^1.2.0",
     "obsidian-dataview": "^0.5.68",
     "publint": "^0.3.13",
-    "tsdown": "^0.15.2",
+    "tsdown": "^0.15.4",
     "typescript": "^5.9.2"
   }
 }
