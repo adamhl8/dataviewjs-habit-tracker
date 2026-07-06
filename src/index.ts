@@ -18,10 +18,10 @@ interface PageData {
 
 const defaultHeaders = ["Day"]
 
-function getPageDay(currentPage: SMarkdownPage) {
+const getPageDay = (currentPage: SMarkdownPage) => {
   const pageDay = currentPage.file.day
   if (!pageDay) {
-    // biome-ignore lint/style/useThrowOnlyError: Obsidian shows the stack trace if an error occurs, so we overwrite it to show a friendlier message.
+    // oxlint-disable-next-line no-throw-literal, typescript/only-throw-error - Obsidian shows the stack trace if an error occurs, so we overwrite it to show a friendlier message.
     throw {
       stack:
         '(If this note is your template, this error is expected.) Unable to get note\'s day. Note should be named in the "YYYY-MM-DD" format.',
@@ -30,25 +30,25 @@ function getPageDay(currentPage: SMarkdownPage) {
   return pageDay
 }
 
-function getDailyNotesPages(pageDay: DateTime) {
-  return dv
+const getDailyNotesPages = (pageDay: DateTime) =>
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion
+  dv
     .pages('"Daily Notes"')
     .where((p: SMarkdownPage) => getPageDay(p) >= pageDay.minus({ days: 7 })) // Only include previous week in table.
     .where((p: SMarkdownPage) => getPageDay(p) <= pageDay) // Don't include future notes.
     .sort((p: SMarkdownPage) => p.file.day, "desc") as DataArray<SMarkdownPage> // Sort table by most recent day.
-}
 
-function getCleanHabitText(habit: STask) {
+const getCleanHabitText = (habit: STask) => {
   let habitText = habit.text.split(" ✅")[0] ?? "" // Remove completion text from Tasks plugin.
   // Remove tag text.
-  for (const tag of habit.tags) {
-    habitText = habitText.replace(tag, "")
-  }
+  for (const tag of habit.tags) habitText = habitText.replace(tag, "")
+
   return habitText.trim()
 }
 
-function getPageHabits(page: SMarkdownPage) {
+const getPageHabits = (page: SMarkdownPage) => {
   const habitTasks = page.file.tasks.filter(
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion
     (t) => (t.section as Link).subpath === "Habits" || t.tags.includes("#habit"),
   )
   const habits: Record<string, boolean> = {}
@@ -62,8 +62,9 @@ function getPageHabits(page: SMarkdownPage) {
   return habits
 }
 
-function createRow(pageData: PageData, headers: Set<string>) {
+const createRow = (pageData: PageData, headers: Set<string>) => {
   const pageDay = getPageDay(pageData.page)
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion
   const pageLink = pageData.page.file.link as Link
   pageLink.display = pageDay.weekdayLong ?? "" // Set display name of the note link to the day of the week.
 
@@ -81,7 +82,7 @@ function createRow(pageData: PageData, headers: Set<string>) {
   return row
 }
 
-async function main() {
+const main = async () => {
   const currentPage = dv.current()
   const pageDay = getPageDay(currentPage)
   const pages = getDailyNotesPages(pageDay)

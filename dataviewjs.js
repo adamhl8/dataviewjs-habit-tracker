@@ -2,7 +2,7 @@
 // Looking to make modifications? See the TypeScript source here: https://github.com/adamhl8/dataviewjs-habit-tracker/blob/main/src/index.ts"
 
 const defaultHeaders = ["Day"]
-function getPageDay(currentPage) {
+const getPageDay = (currentPage) => {
   const pageDay = currentPage.file.day
   if (!pageDay)
     throw {
@@ -11,19 +11,18 @@ function getPageDay(currentPage) {
     }
   return pageDay
 }
-function getDailyNotesPages(pageDay) {
-  return dv
+const getDailyNotesPages = (pageDay) =>
+  dv
     .pages('"Daily Notes"')
     .where((p) => getPageDay(p) >= pageDay.minus({ days: 7 }))
     .where((p) => getPageDay(p) <= pageDay)
     .sort((p) => p.file.day, "desc")
-}
-function getCleanHabitText(habit) {
+const getCleanHabitText = (habit) => {
   let habitText = habit.text.split(" ✅")[0] ?? ""
   for (const tag of habit.tags) habitText = habitText.replace(tag, "")
   return habitText.trim()
 }
-function getPageHabits(page) {
+const getPageHabits = (page) => {
   const habitTasks = page.file.tasks.filter((t) => t.section.subpath === "Habits" || t.tags.includes("#habit"))
   const habits = {}
   for (const habitTask of habitTasks) {
@@ -32,7 +31,7 @@ function getPageHabits(page) {
   }
   return habits
 }
-function createRow(pageData, headers) {
+const createRow = (pageData, headers) => {
   const pageDay = getPageDay(pageData.page)
   const pageLink = pageData.page.file.link
   pageLink.display = pageDay.weekdayLong ?? ""
@@ -45,7 +44,7 @@ function createRow(pageData, headers) {
   }
   return row
 }
-async function main() {
+const main = async () => {
   const currentPage = dv.current()
   const pageDay = getPageDay(currentPage)
   const pages = getDailyNotesPages(pageDay)
