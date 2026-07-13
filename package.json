@@ -1,6 +1,6 @@
 {
   "name": "dataviewjs-habit-tracker",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": true,
   "description": "A dataviewjs code snippet that tracks habit completions over the past week",
   "license": "MIT",
