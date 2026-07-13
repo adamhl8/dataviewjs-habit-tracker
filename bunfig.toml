@@ -2,6 +2,7 @@
 pathIgnorePatterns = ["fixtures/**", "fixture/**"]
 coverage = true
 coverageSkipTestFiles = true
+coveragePathIgnorePatterns = ["src/test-setup.ts"]
 concurrentTestGlob = "**/*.test.ts"
 onlyFailures = true
 

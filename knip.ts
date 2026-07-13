@@ -1,5 +1,5 @@
 import { knipConfig } from "@adamhl8/configs"
 
-const config = knipConfig({ entry: ["./dataviewjs.js"] }, { arrays: "replace" })
+const config = knipConfig({ entry: ["./dataviewjs.js"] })
 
 export default config

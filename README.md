@@ -21,7 +21,7 @@ Issues/PRs are welcome and encouraged.
 <dataviewjs code block here>
 ```
 
-Get snippet code [here](https://github.com/adamhl8/dataviewjs-habits-tracker/blob/main/dataviewjs.js).
+Get snippet code [here](https://github.com/adamhl8/dataviewjs-habit-tracker/blob/main/dataviewjs.js).
 
 ![](https://user-images.githubusercontent.com/1844269/177612045-5409aff4-c569-419c-8314-1554ee206091.png)
 
@@ -37,7 +37,7 @@ This assumes you're using the built-in Daily notes plugin.
 
 - In your daily notes template, add habits (as tasks) under a header named "Habits".
   - You can also add a `#habit` tag to your tasks in addition to or instead of the header.
-- Paste the [dataviewjs snippet](https://github.com/adamhl8/dataviewjs-habits-tracker/blob/main/dataviewjs.js) in a dataviewjs code block in your template.
+- Paste the [dataviewjs snippet](https://github.com/adamhl8/dataviewjs-habit-tracker/blob/main/dataviewjs.js) in a dataviewjs code block in your template.
 
 ````
 ```dataviewjs
