@@ -1,3 +1,9 @@
+## [0.2.4](https://github.com/adamhl8/dataviewjs-habit-tracker/compare/v0.2.3..v0.2.4) - 2026-09-24
+
+### ⚙️ Miscellaneous Tasks
+
+- _(deps)_ update dependencies ([0dd359e](https://github.com/adamhl8/dataviewjs-habit-tracker/commit/0dd359e7596a2f39395bb4127e038cb83c12f124) by @adamhl8)
+
 ## [0.2.3](https://github.com/adamhl8/dataviewjs-habit-tracker/compare/v0.2.2..v0.2.3) - 2026-07-13
 
 ### ⚙️ Miscellaneous Tasks
