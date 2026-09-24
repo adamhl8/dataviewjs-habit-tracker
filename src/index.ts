@@ -31,11 +31,11 @@ const getPageDay = (currentPage: SMarkdownPage) => {
 }
 
 const getDailyNotesPages = (pageDay: DateTime) =>
-  // oxlint-disable-next-line typescript/no-unsafe-type-assertion
   dv
     .pages('"Daily Notes"')
     .where((p: SMarkdownPage) => getPageDay(p) >= pageDay.minus({ days: 7 })) // Only include previous week in table.
     .where((p: SMarkdownPage) => getPageDay(p) <= pageDay) // Don't include future notes.
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion
     .sort((p: SMarkdownPage) => p.file.day, "desc") as DataArray<SMarkdownPage> // Sort table by most recent day.
 
 const getCleanHabitText = (habit: STask) => {

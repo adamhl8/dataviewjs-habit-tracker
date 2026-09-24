@@ -1,4 +1,5 @@
 import { tsdownBundleConfig } from "@adamhl8/configs"
+import { $ } from "bun"
 import { defineConfig } from "tsdown"
 
 const banner = `// dataviewjs-habit-tracker | https://github.com/adamhl8/dataviewjs-habit-tracker
@@ -15,6 +16,11 @@ const config = tsdownBundleConfig({
   },
   banner: {
     js: banner,
+  },
+  hooks: {
+    "build:done": async () => {
+      await $`bun oxfmt dataviewjs.js`
+    },
   },
 })
 
