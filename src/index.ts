@@ -31,11 +31,11 @@ const getPageDay = (currentPage: SMarkdownPage) => {
 }
 
 const getDailyNotesPages = (pageDay: DateTime) =>
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion - Dataview types `pages` as `DataArray<any>`.
   dv
     .pages('"Daily Notes"')
     .where((p: SMarkdownPage) => getPageDay(p) >= pageDay.minus({ days: 7 })) // Only include previous week in table.
     .where((p: SMarkdownPage) => getPageDay(p) <= pageDay) // Don't include future notes.
-    // oxlint-disable-next-line typescript/no-unsafe-type-assertion
     .sort((p: SMarkdownPage) => p.file.day, "desc") as DataArray<SMarkdownPage> // Sort table by most recent day.
 
 const getCleanHabitText = (habit: STask) => {
@@ -48,7 +48,7 @@ const getCleanHabitText = (habit: STask) => {
 
 const getPageHabits = (page: SMarkdownPage) => {
   const habitTasks = page.file.tasks.filter(
-    // oxlint-disable-next-line typescript/no-unsafe-type-assertion
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion - Dataview's published types leave `Link` unresolved, so it arrives as `any`.
     (t) => (t.section as Link).subpath === "Habits" || t.tags.includes("#habit"),
   )
   const habits: Record<string, boolean> = {}
@@ -64,7 +64,7 @@ const getPageHabits = (page: SMarkdownPage) => {
 
 const createRow = (pageData: PageData, headers: Set<string>) => {
   const pageDay = getPageDay(pageData.page)
-  // oxlint-disable-next-line typescript/no-unsafe-type-assertion
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion - Dataview's published types leave `Link` unresolved, so it arrives as `any`.
   const pageLink = pageData.page.file.link as Link
   pageLink.display = pageDay.weekdayLong ?? "" // Set display name of the note link to the day of the week.
 

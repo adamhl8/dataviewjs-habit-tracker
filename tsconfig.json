@@ -1,4 +1,1 @@
-{
-  "extends": "@adamhl8/configs/tsconfig",
-  "exclude": ["dataviewjs.js"]
-}
+{ "extends": "@adamhl8/configs/tsconfig" }
